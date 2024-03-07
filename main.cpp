@@ -103,6 +103,10 @@ public:
         return cpu;
     }
 
+    int getPrice() {
+        return price;
+    }
+
 };
 
 int main(){
@@ -117,18 +121,38 @@ int main(){
     // SKRIV KOD (obs! använd <ALGORITHM> och EFFEKTIVA sådana ) SOM...
 
     //1. Hur många Dell finns det?
+    int antalDell = std::count_if(std::begin(computers), std::end(computers), [](Computer &c){
+        return c.getManufacturer() == "Dell";
+    });
+    std::cout << "Det finns " << antalDell << " stycken Dell-datorer." << std::endl; 
 
     //2. Sortera alla i prisordning (billigast först)
     //   skriv ut de 10 första
+    std::sort(std::begin(computers), std::end(computers), [](Computer c2, Computer c3)
+              { return c2.getPrice() > c3.getPrice(); });
+    //std::cout << computers[0].getPrice() << std::endl;
+    //std::cout << computers[0].getModel() << std::endl;
+    //int j = 10;
+    std::cout << "De 10 billigaste datorerna: " << std::endl;
+    for (int i = 0; i < 10; i++){
+        std::cout << computers[i].getManufacturer() << " " << computers[i].getModel() << " för" << computers[i].getPrice() << "kr." << std::endl;
+    }
+    //for (Computer c : computers)
 
+        // 3. Finns det nån som skapar kostar mer än 41500 kr?
+    std::cout << "Dessa datorer kostar mer än 41500kr: " << std::endl;
+    for (Computer c : computers){
+        if (c.getPrice() > 14500)
+        {
+            std::cout << c.getManufacturer() << " " << c.getModel() << "för " << c.getPrice() << "kr." << std::endl;
+        }
+        
+    }
 
-    //3. Finns det nån som skapar kostar mer än 41500 kr? 
+    // 4. Räkna många Desktop-datorer med Core i9-11900K det finns
 
-    //4. Räkna många Desktop-datorer med Core i9-11900K det finns
-
-    //5.  Sortera så att det är i descending  LÄNGD-ordning för  ComputerCPUTypes
-    //                  dvs först alla Heterogeneous System Architecture, sist alla X86
-    //                  de som har samma sorterar du på ComputerManufactures ascending
-
-
-}
+    // 5.  Sortera så att det är i descending  LÄNGD-ordning för  ComputerCPUTypes
+    //                   dvs först alla Heterogeneous System Architecture, sist alla X86
+    //                   de som har samma sorterar du på ComputerManufactures ascending
+    return 0;
+    }
