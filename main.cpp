@@ -129,7 +129,7 @@ int main(){
     //2. Sortera alla i prisordning (billigast först)
     //   skriv ut de 10 första
     std::sort(std::begin(computers), std::end(computers), [](Computer c2, Computer c3)
-              { return c2.getPrice() > c3.getPrice(); });
+              { return c2.getPrice() < c3.getPrice(); });
     //std::cout << computers[0].getPrice() << std::endl;
     //std::cout << computers[0].getModel() << std::endl;
     //int j = 10;
@@ -137,22 +137,40 @@ int main(){
     for (int i = 0; i < 10; i++){
         std::cout << computers[i].getManufacturer() << " " << computers[i].getModel() << " för" << computers[i].getPrice() << "kr." << std::endl;
     }
-    //for (Computer c : computers)
 
-        // 3. Finns det nån som skapar kostar mer än 41500 kr?
-    std::cout << "Dessa datorer kostar mer än 41500kr: " << std::endl;
+    // 3. Finns det nån som skapar kostar mer än 41500 kr?
+    //std::cout << "Dessa datorer kostar mer än 39000kr: " << std::endl;
+    int counter = 0;
     for (Computer c : computers){
-        if (c.getPrice() > 14500)
+        if (c.getPrice() >= 39500)
         {
-            std::cout << c.getManufacturer() << " " << c.getModel() << "för " << c.getPrice() << "kr." << std::endl;
+            counter ++;
         }
-        
     }
+    if (counter > 0){
+        std::cout << "Det finns " << counter << " datorer som kostar minst 39500." << std::endl;
+    }
+    if (counter = 0) {
+        std::cout << "Det finns inga datorer som kostar 41500 eller mer." << std::endl;
+    }
+    
+        
+        
+    
 
     // 4. Räkna många Desktop-datorer med Core i9-11900K det finns
+    int cpu = 0;
+    for (Computer c : computers)
+    {
+        if (c.getCpu() == "Core i9-11900K")
+        {
+            cpu++;
+        }
+    }
+    std::cout << "Det finns " << cpu << "datorer med Core i9-11900K." << std::endl;
+    // /5.  Sortera så att det är i descending  LÄNGD-ordning för  ComputerCPUModels
+    //                  dvs först alla Pentium Gold G6400, sist alla Apple M1 och Apple M2
+    //                  de som har samma sorterar du på ComputerManufactures ascending
 
-    // 5.  Sortera så att det är i descending  LÄNGD-ordning för  ComputerCPUTypes
-    //                   dvs först alla Heterogeneous System Architecture, sist alla X86
-    //                   de som har samma sorterar du på ComputerManufactures ascending
     return 0;
     }
